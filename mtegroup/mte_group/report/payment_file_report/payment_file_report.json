@@ -1,0 +1,28 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2025-02-13 15:02:44.262890",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2025-02-13 17:20:34.660484",
+ "modified_by": "Administrator",
+ "module": "MTE Group",
+ "name": "Payment File Report",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT\n    `tabPayment File`.`name` AS `Name`,\n    `tabPayment File`.`debit_account_mte` AS `Debit Account(MTE)`,\n    `tabPayment File Table`.`party_name` AS `Party Name`,\n    `tabPayment File Table`.`supplier_name` AS `Supplier Name`,\n    `tabPayment File Table`.`payment_date` AS `Payment Date`,\n    `tabPayment File Table`.`payable_amount` AS `Payable Amount`,\n    `tabPayment File Table`.`payment_type` AS `Payment Type`,\n    `tabPayment File Table`.`bank_account_number` AS `Bank Account Number`,\n    `tabPayment File Table`.`bank_account_name` AS `Bank Account Name`,\n    `tabPayment File Table`.`ifsc` AS `IFSC`,\n    `tabPayment File Table`.`email_id` AS `Email ID`,\n    `tabPayment File Table`.`mobile_no` AS `Mobile No`,\n    `tabPayment File Table`.`reference_number` AS `Reference Number`,\n    `tabPayment File Table`.`remarks` AS `Remarks`\nFROM\n    `tabPayment File`\nLEFT JOIN\n    `tabPayment File Table`\nON \n    `tabPayment File`.`name` = `tabPayment File Table`.`parent`\nORDER BY\n    `tabPayment File`.`modified` DESC\n    \n    \n    \n    ",
+ "ref_doctype": "Payment File",
+ "report_name": "Payment File Report",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ],
+ "timeout": 0
+}
