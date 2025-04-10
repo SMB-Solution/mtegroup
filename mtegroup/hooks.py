@@ -140,13 +140,16 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
+doc_events = {
 # 	"*": {
 # 		"on_update": "method",
 # 		"on_cancel": "method",
 # 		"on_trash": "method"
 # 	}
-# }
+    "Subcontracting Receipt": {
+        "on_submit": "mtegroup.api.custom_make_purchase_receipt"
+    }
+}
 
 # Scheduled Tasks
 # ---------------
@@ -177,11 +180,9 @@ app_license = "mit"
 # Overriding Methods
 # ------------------------------
 #
-override_whitelisted_methods = {
+# override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "mtegroup.event.get_events"
-    "erpnext.subcontracting.doctype.subcontracting_receipt.subcontracting_receipt.make_purchase_receipt":
-        "mtegroup.api.custom_make_purchase_receipt"
-}
+# }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
