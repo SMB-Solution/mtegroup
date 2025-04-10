@@ -27,6 +27,9 @@ app_license = "mit"
 # include js, css files in header of desk.html
 # app_include_css = "/assets/mtegroup/css/mtegroup.css"
 # app_include_js = "/assets/mtegroup/js/mtegroup.js"
+# app_include_js = [
+#     "/assets/mtegroup/js/payment_file_report.js"
+# ]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/mtegroup/css/mtegroup.css"
@@ -174,9 +177,11 @@ app_license = "mit"
 # Overriding Methods
 # ------------------------------
 #
-# override_whitelisted_methods = {
+override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "mtegroup.event.get_events"
-# }
+    "erpnext.subcontracting.doctype.subcontracting_receipt.subcontracting_receipt.make_purchase_receipt":
+        "mtegroup.api.custom_make_purchase_receipt"
+}
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
