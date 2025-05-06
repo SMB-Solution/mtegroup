@@ -1,20 +1,16 @@
 # File: mtegroup/api.py
 
-# import frappe
-# from erpnext.erpnext.subcontracting.doctype.subcontracting_receipt.subcontracting_receipt import make_purchase_receipt as erpnext_make_pr
+import frappe
 
-# def custom_make_purchase_receipt(source_name):
-#     try:
-#         subcontracting_receipt = frappe.get_doc("Subcontracting Receipt", source_name)
-#         pr = erpnext_make_pr(source_name)
-#         if subcontracting_receipt.supplier_delivery_note:
-#             pr.supplier_delivery_note = subcontracting_receipt.supplier_delivery_note
-#         else:
-#             frappe.throw("Supplier Delivery Note is missing in Subcontracting Receipt")
-#         pr.insert(ignore_permissions=True)
-#         pr.submit()
-#         frappe.msgprint(f"Purchase Receipt <b>{pr.name}</b> created successfully.")
-#         return pr
-#     except Exception as e:
-#         frappe.log_error(f"Error creating Purchase Receipt from {source_name}: {str(e)}")
-#         frappe.throw(f"Failed to create Purchase Receipt: {str(e)}")
+@frappe.whitelist()
+def cancel_linked_journal_entry(expense_claim_name):
+    doc = frappe.get_doc("MTE Expense Claims", expense_claim_name)
+    if doc.journal_entry:
+        try:
+            je = frappe.get_doc("Journal Entry", doc.journal_entry)
+            if je.docstatus == 1:
+                je.cancel()
+                return f"Journal Entry {je.name} cancelled."
+        except frappe.DoesNotExistError:
+            return "Journal Entry not found."
+    return "No linked Journal Entry."
